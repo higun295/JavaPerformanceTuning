@@ -8,8 +8,8 @@
         <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example</groupId>
-    <artifactId>JavaPerformanceTuning</artifactId>
+    <groupId>com</groupId>
+    <artifactId>perf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>JavaPerformanceTuning</name>
     <description>JavaPerformanceTuning</description>
