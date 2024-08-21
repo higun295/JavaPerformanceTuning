@@ -1,24 +1,40 @@
 package com.perf.string;
 
-public class StringTest {
-    public static void main(String[] args) {
-        final String aValue = "abcde";
-        for(int outLoop = 0; outLoop < 10; outLoop++) {
-            String a = new String();
-            StringBuffer b = new StringBuffer();
-            StringBuilder c = new StringBuilder();
+import org.openjdk.jmh.annotations.*;
 
-            for(int loop=0; loop<10000; loop++) {
-                a += aValue;
-            }
-            for(int loop=0; loop<10000; loop++) {
-                b.append(aValue);
-            }
-            String temp = b.toString();
-            for(int loop=0; loop<10000; loop++) {
-                c.append(aValue);
-            }
-            String temp2 = c.toString();
+import java.util.concurrent.TimeUnit;
+
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@State(Scope.Thread)
+public class StringTest {
+
+    private static final String A_VALUE = "abcde";
+
+    @Benchmark
+    public String testString() {
+        String a = "";
+        for (int loop = 0; loop < 10000; loop++) {
+            a += A_VALUE;
         }
+        return a;
+    }
+
+    @Benchmark
+    public StringBuffer testStringBuffer() {
+        StringBuffer b = new StringBuffer();
+        for (int loop = 0; loop < 10000; loop++) {
+            b.append(A_VALUE);
+        }
+        return b;
+    }
+
+    @Benchmark
+    public StringBuilder testStringBuilder() {
+        StringBuilder c = new StringBuilder();
+        for (int loop = 0; loop < 10000; loop++) {
+            c.append(A_VALUE);
+        }
+        return c;
     }
 }
